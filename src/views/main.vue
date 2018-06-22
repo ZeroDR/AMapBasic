@@ -29,10 +29,11 @@
       loadedMap(){
           let t = this;
           let dt = {
+            "id":"LAYER_GS",
+            "features":[{
             "geoType": "POINT",
             "attr": {
               "code": "27fc33a6-b08c-4cdb-82ff",
-              "lc": "LAYER_GS",
               "lt": "MI",
               "vl": 93,
               "nm": "霸州市第三小学",
@@ -50,16 +51,16 @@
               "lng": 116.417,
               "lat": 39.124
             }
-          };
+          }]};
         AMapUtil.loadedOverlay(dt, {hasEvent: true, fcbClick: t.requestMarker}, {hasEvent: false, hasValue: true});
 
 
-        setTimeout(function(){
-            AMapUtil.loadedPointSimplifier();
+        // setTimeout(function(){
+            // AMapUtil.loadedPointSimplifier();
 //            let ls = AMapUtil.getOverlayByLayerType('LAYER_GS','NAMEL');
 //            AMapUtil.removeMapOverlay(ls);
             //AMapUtil.clearMapOverlay();
-        },5000)
+        // },5000)
       },
 
       loadedGeo(){
@@ -151,7 +152,7 @@
       },
 
       //数据转换 data:待转换数据 lc:图层标识 kf:唯一标识 vf:ValueField lt:点显示方式
-      dataTransform(data, lc, kf, vf, lt){
+      dataTransform(data, kf, df,vf, lt){
         let rtValue = [];
         let fs = data.features;
         for (let i = 0, length = fs.length; i < length; i++) {
@@ -177,7 +178,7 @@
                 height:20,
                 width:20
               },
-              nm: v.pointname,
+              nm: v[df],
               le: le,
               hd: false,//le > 3,
               miu: 'static/imgs/environmental/gs-g.png',//16*16
