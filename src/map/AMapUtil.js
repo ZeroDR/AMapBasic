@@ -331,6 +331,7 @@ export default {
         infoBody: el,
         autoMove: true
       });
+      fs.visibleInfoWindow = true;
       t.searchInfoWindow.open(t.map, pt);
     });
   },

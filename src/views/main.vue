@@ -1,20 +1,26 @@
 <template>
   <div class="content">
     <div id="map"></div>
+    <PopupInfoWindow type="air" v-if="visibleInfoWindow"></PopupInfoWindow>
   </div>
 </template>
 <script>
+  import Axio from 'axios'
   import RequestHandle from '@/request'
   import AMapUtil from '@/map/AMapUtil'
   import EnvironmentalUtil from '@/stand/EnvironmentalUtil'
+
+  import PopupInfoWindow from '@/components/map/PopupInfoWindow'
 
   export default {
     name: 'Main',
     data () {
       return {
-        source: {}
+        source: {},
+        visibleInfoWindow:false
       };
     },
+    components:{PopupInfoWindow},
     created(){
     },
     mounted(){
@@ -69,7 +75,12 @@
 
       //点击弹出框事件
       requestMarker(fc, callback){
-          callback(fc,'<div style="height:120px;width:120px;background:#333;border:solid 1px #000;" onclick="alert(12)">123</div>',{width: 410, height: 'auto'});
+          this.visibleInfoWindow = false;
+          // callback(fc,'<div style="height:120px;width:120px;background:#333;border:solid 1px #000;" onclick="alert(12)">123</div>',{width: 410, height: 'auto'});
+          setTimeout(()=>{
+            callback(fc,'<div style="width:auto;height:auto;" id="popupinfowindow"></div>',this);
+          },1000);
+          
       },
 
       //设置图表
